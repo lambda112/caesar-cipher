@@ -1,3 +1,6 @@
+from art import logo
+
+
 def type_shift():
     shift_type = input("Type encode to encrypt, type decode to decrypt: ").lower()
 
@@ -8,12 +11,12 @@ def type_shift():
     return shift_type
 
 
+
 def shift_number(shift = False, shift_type = "encode"):
 
     while not shift:
         try:
-            shift = int(input("Enter a shift number:"))
-
+            shift = int(input("Enter a shift number: "))
         except ValueError:
             print("Enter a Number!\n")
 
@@ -21,6 +24,7 @@ def shift_number(shift = False, shift_type = "encode"):
         return shift
     else:
         return -shift
+
 
 
 def shift_letters(shift, letters = list("abcdefghijklmnopqrstuvwxyz")):
@@ -32,10 +36,7 @@ def shift_letters(shift, letters = list("abcdefghijklmnopqrstuvwxyz")):
 
         if char in letters:
             index = letters.index(char) - shift
-
-            if index > 25:
-                index = index - 26
-
+            index = index % 26
             new_message += letters[index]
 
         else:
@@ -44,8 +45,11 @@ def shift_letters(shift, letters = list("abcdefghijklmnopqrstuvwxyz")):
     return new_message
 
 
+
 def end_program():
+
     finished = input("Finished, type yes or no: ")
+
     while finished not in ("yes", "no"):
         print("Type yes or no\n")
         finished = input("Finished, type yes or no: ")
@@ -53,19 +57,22 @@ def end_program():
     return finished
 
 
+
 def main():
+
     finished = False
     while finished != "yes":
 
         shift_type = type_shift() 
         shift = shift_number(False, shift_type)
         message = shift_letters(shift)
-        print(message)
+        print(f"Output: {message}")
 
         finished = end_program()
         print(" ")
     
 
+print(logo)
 main()
 
     
